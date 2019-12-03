@@ -19,6 +19,9 @@ function drawNextSegment() {
     ctx.fillStyle = "#00000010";
     ctx.fillRect(0, 0, 800, 800);
 
+    // ctx.filter = 'blur(4px)';
+    // let screen = ctx.
+
     //line
     let dist = Math.floor(Math.random() * 100);
     let nextX = x + Math.sin(angle) * dist;
@@ -32,12 +35,13 @@ function drawNextSegment() {
     ctx.lineTo(nextX, nextY);
     ctx.stroke();
 
-    let nextAngle = angle + Math.random() * Math.PI * 2;
-    let nextRadi = Math.random() * 10;
+    let nextAngle = angle + Math.random() * Math.PI - (Math.PI / 2);
 
-    ctx.beginPath();
-    ctx.arc(nextX, nextY, nextRadi, nextAngle, angle, Math.random() >= 0.5);
-    ctx.stroke();
+    // let nextRadi = Math.random() * 10;
+
+    // ctx.beginPath();
+    // ctx.arc(nextX, nextY, nextRadi, nextAngle, angle, Math.random() >= 0.5);
+    // ctx.stroke();
 
     x = nextX;
     y = nextY;
