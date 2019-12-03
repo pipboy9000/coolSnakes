@@ -12,6 +12,8 @@ let z = 1;
 
 let angle = Math.PI; //90 degrees
 
+let angleFlux = 0;
+
 let state = 0; // 0: line 1:arc
 
 function drawNextSegment() {
@@ -19,15 +21,13 @@ function drawNextSegment() {
     ctx.fillStyle = "#00000010";
     ctx.fillRect(0, 0, 800, 800);
 
-    // ctx.filter = 'blur(4px)';
-    // let screen = ctx.
-
     //line
-    let dist = Math.floor(Math.random() * 100);
+    // let dist = Math.floor(Math.random() * 20);
+    let dist = 15;
     let nextX = x + Math.sin(angle) * dist;
     let nextY = y + Math.cos(angle) * dist;
 
-    z += 1;
+    z += .1;
 
     ctx.beginPath();
     ctx.moveTo(x, y);
@@ -35,25 +35,25 @@ function drawNextSegment() {
     ctx.lineTo(nextX, nextY);
     ctx.stroke();
 
-    let nextAngle = angle + Math.random() * Math.PI - (Math.PI / 2);
+    let nextAngle = angle + (Math.random() * Math.PI - (Math.PI / 2)) * angleFlux;
 
-    // let nextRadi = Math.random() * 10;
+    ctx.beginPath();
 
-    // ctx.beginPath();
-    // ctx.arc(nextX, nextY, nextRadi, nextAngle, angle, Math.random() >= 0.5);
-    // ctx.stroke();
+    ctx.fillStyle = "#29ff7e";
+
+    ctx.arc(nextX, nextY, z / 2, 0, Math.PI * 2);
+    ctx.fill();
 
     x = nextX;
     y = nextY;
     angle = nextAngle;
+    angleFlux = Math.sin(performance.now() / 10);
 
     if (x > 800 || x < 0 || y > 800 || y < 0) {
         x = 400;
         y = 400;
         z = 1;
     }
-
-    console.log('end segment')
 }
 
 function render(d) {
