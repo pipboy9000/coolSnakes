@@ -14,20 +14,27 @@ let angle = Math.PI; //90 degrees
 
 let angleFlux = 0;
 
+let dist = 5;
+
 let state = 0; // 0: line 1:arc
 
 function drawNextSegment() {
     //fade last
-    ctx.fillStyle = "#00000010";
+    ctx.fillStyle = "#00000005";
     ctx.fillRect(0, 0, 800, 800);
 
     //line
     // let dist = Math.floor(Math.random() * 20);
-    let dist = 15;
     let nextX = x + Math.sin(angle) * dist;
     let nextY = y + Math.cos(angle) * dist;
 
-    z += .1;
+    z += .4;
+    dist += 0.15;
+
+    let hue = performance.now() / 10 % 255
+
+    ctx.fillStyle = `hsl(${hue},100%,70%`;
+    ctx.strokeStyle = `hsl(${hue},100%,70%`;
 
     ctx.beginPath();
     ctx.moveTo(x, y);
@@ -39,7 +46,7 @@ function drawNextSegment() {
 
     ctx.beginPath();
 
-    ctx.fillStyle = "#29ff7e";
+    console.log(hue);
 
     ctx.arc(nextX, nextY, z / 2, 0, Math.PI * 2);
     ctx.fill();
@@ -47,12 +54,13 @@ function drawNextSegment() {
     x = nextX;
     y = nextY;
     angle = nextAngle;
-    angleFlux = Math.sin(performance.now() / 10);
+    angleFlux = Math.sin(performance.now() / 250);
 
     if (x > 800 || x < 0 || y > 800 || y < 0) {
         x = 400;
         y = 400;
         z = 1;
+        dist = 5;
     }
 }
 
