@@ -10,27 +10,29 @@ ctx.lineWidth = 4;
 
 ctx.fillRect(0, 0, width, height);
 
+//start position
 let x = width / 2;
 let y = height / 2;
 
 let angle = (Math.floor(Math.random() * 9) - 4) * 0.7853981634;
 
-function mark(x, y) {
-    ctx.strokeStyle = "red";
-    ctx.beginPath()
-    ctx.arc(x, y, 10, 0, Math.PI * 2);
-    ctx.stroke();
-}
+let minSegementLength = 30;
+let randSegmentLength = 100;
+let colorChangeRate = 50;
+let fade = 0.07;
+let minJointRadius = 20;
+let randJointRadius = 50;
 
 function drawNextSegment() {
 
     //fade last
-    ctx.fillStyle = "#00000005";
+    ctx.fillStyle = "rgba(0,0,0," + fade + ")";
+    console.log(ctx.fillStyle);
     ctx.fillRect(0, 0, 800, 800);
 
-    let dist = Math.random() * 100 + 30;
+    let dist = +minSegementLength + Math.random() * randSegmentLength;
 
-    let hue = performance.now() / 10 % 360
+    let hue = performance.now() / colorChangeRate % 360
 
     ctx.strokeStyle = `hsl(${hue},100%,70%`;
 
@@ -45,7 +47,7 @@ function drawNextSegment() {
 
     let nextAngle = (angle + Math.ceil(Math.random() * 3) * 0.7853981634) % (Math.PI * 2);
 
-    let cornerRad = Math.random() * 50 + 10;
+    let cornerRad = Math.random() * randJointRadius + minJointRadius;
 
     let cornerCenterX = nextX + (Math.cos(angle + Math.PI / 2)) * cornerRad;
     let cornerCenterY = nextY + (Math.sin(angle + Math.PI / 2)) * cornerRad;
@@ -59,8 +61,6 @@ function drawNextSegment() {
     //set to arc endpoint
     x = cornerCenterX + Math.cos(nextAngle - Math.PI / 2) * cornerRad;
     y = cornerCenterY + Math.sin(nextAngle - Math.PI / 2) * cornerRad;
-
-    // mark(x, y);
 
     angle = nextAngle;
 
@@ -79,3 +79,30 @@ function render(d) {
 }
 
 render();
+
+
+//input functions
+function setMinSegmentLength(val) {
+    minSegementLength = +val;
+}
+
+function setRandSegmentLength(val) {
+    randSegmentLength = +val;
+}
+
+function setColorChangeRate(val) {
+    colorChangeRate = 100 - +val
+    console.log(colorChangeRate);
+}
+
+function setFade(val) {
+    fade = +val / 255;
+}
+
+function setMinJointRadius(val) {
+    minJointRadius = +val;
+}
+
+function setRandJointRadius(val) {
+    randJointRadius = +val;
+}
