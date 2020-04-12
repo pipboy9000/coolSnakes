@@ -47,7 +47,7 @@ function drawNextSegment() {
     ctx.stroke();
 
     // let nextAngle = (angle + Math.ceil(Math.random() * 3) * 0.7853981634) % (Math.PI * 2);
-    let nextAngle = angle + Math.random() * randJointAngle + minJointAngle;
+    let nextAngle = angle + (Math.random() * randJointAngle) + minJointAngle;
 
     let cornerRad = Math.random() * randJointRadius + minJointRadius;
 
@@ -111,5 +111,5 @@ function setMinJointAngle(val) {
 }
 
 function setRandJointAngle(val) {
-    minJointAngle = +val;
+    randJointAngle = +val;
 }

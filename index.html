@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <canvas id="canvas" width="600" height="600"></canvas>
+    <canvas id="canvas" width="500" height="500"></canvas>
     <div class="controls">
         <label>Minimum Segment Length</label>
         <input type="range" min="2" max="200" value="100" oninput="setMinSegmentLength(this.value)">
@@ -25,12 +25,10 @@
         <label>Random Joint Radius</label>
         <input type="range" min="1" max="200" value="50" oninput="setRandJointRadius(this.value)">
         <label>Minimum Joint Angle</label>
-        <input type="range" min="0.1" max="6.2831" value="0.7853981634" step="0.001"
+        <input type="range" min="0" max="6.2831" value="0.7853981634" step="0.001"
             oninput="setMinJointAngle(this.value)">
         <label>Random Joint Angle</label>
-        <input type="range" min="0.1" max="6.2831" value="0.7853981634" step="0.001"
-            oninput="setRandJointAngle(this.value)">
-    </div>
+        <input type="range" min="0" max="6.2831" value="0" step="0.001" oninput="setRandJointAngle(this.value)">
     </div>
 </body>
 
