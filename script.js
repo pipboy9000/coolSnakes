@@ -22,12 +22,13 @@ let colorChangeRate = 50;
 let fade = 0.07;
 let minJointRadius = 20;
 let randJointRadius = 50;
+let minJointAngle = 0.7853981634;
+let randJointAngle = 0;
 
 function drawNextSegment() {
 
     //fade last
     ctx.fillStyle = "rgba(0,0,0," + fade + ")";
-    console.log(ctx.fillStyle);
     ctx.fillRect(0, 0, 800, 800);
 
     let dist = +minSegementLength + Math.random() * randSegmentLength;
@@ -45,14 +46,13 @@ function drawNextSegment() {
     ctx.lineTo(nextX, nextY);
     ctx.stroke();
 
-    let nextAngle = (angle + Math.ceil(Math.random() * 3) * 0.7853981634) % (Math.PI * 2);
+    // let nextAngle = (angle + Math.ceil(Math.random() * 3) * 0.7853981634) % (Math.PI * 2);
+    let nextAngle = angle + Math.random() * randJointAngle + minJointAngle;
 
     let cornerRad = Math.random() * randJointRadius + minJointRadius;
 
     let cornerCenterX = nextX + (Math.cos(angle + Math.PI / 2)) * cornerRad;
     let cornerCenterY = nextY + (Math.sin(angle + Math.PI / 2)) * cornerRad;
-
-    // mark(cornerCenterX, cornerCenterY);
 
     ctx.beginPath();
     ctx.arc(cornerCenterX, cornerCenterY, cornerRad, angle - Math.PI / 2, nextAngle - Math.PI / 2, false);
@@ -92,7 +92,6 @@ function setRandSegmentLength(val) {
 
 function setColorChangeRate(val) {
     colorChangeRate = 100 - +val
-    console.log(colorChangeRate);
 }
 
 function setFade(val) {
@@ -105,4 +104,12 @@ function setMinJointRadius(val) {
 
 function setRandJointRadius(val) {
     randJointRadius = +val;
+}
+
+function setMinJointAngle(val) {
+    minJointAngle = +val;
+}
+
+function setRandJointAngle(val) {
+    minJointAngle = +val;
 }
